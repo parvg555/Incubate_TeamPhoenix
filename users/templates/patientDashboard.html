@@ -1,0 +1,40 @@
+{% extends 'base.html' %}{% load static %} {% block content %}
+
+<div class="content">
+    <div class="col-lg-12">
+        <div class="box-element">
+<a href="{% url 'patientAppointments'%}" class="btn btn-sm btn-primary">MY APPOINTMENTS</a>
+<a href="{% url 'patientProfileUpdate'%}" class="btn btn-sm btn-danger">COMPLETE PROFILE</a>
+<a href="{% url 'myprescriptions'%}" class="btn btn-sm btn-danger">My prescriptions</a>
+<br />
+</div>
+<div class="col-lg-12">
+<div class="box-element">
+<form method="GET">
+    {{myFilter.form}}
+    <input type="submit">
+</form>
+<hr>
+<div>
+    <div class="cart-row">
+        <div style="flex: 1;"><strong>Doctor's Name</strong></div>
+        <div style="flex: 1;"><strong>Speciality</strong></div>
+        <div style="flex: 1;"><strong>Working Hours</strong> </div>
+        <div style="flex: 1;"><strong>City</strong> </div>
+        <div style="flex: 1;"><strong>Book Appointment</strong></div>
+    </div>
+    {% for i in doctors %}
+    <div class="cart-row">
+        <div style="flex: 1;" >{{i.user.first_name}} {{i.user.last_name}}</div>
+        <div style="flex: 1;">{{i.speciality}}</div>
+        <div style="flex: 1;" >{{i.open_time}}-{{i.close_time}}</div>
+        <div style="flex: 1;" >{{i.city}}</div>
+        <div style="flex: 1;"><a href="{% url 'bookAppointment' i.user.id %}" class="btn btn-sm btn-primary">BOOK</a></div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
